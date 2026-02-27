@@ -1,0 +1,166 @@
+/* ============================================================
+   variables.css — ETFkalkulator.pl
+   Design system — jeden plik rządzi całym wyglądem projektu.
+   Zmień wartość tutaj → zmienia się wszędzie na stronie.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap');
+
+:root {
+
+  /* ==========================================================
+     KOLORY
+     Filozofia: ciepła biel + zieleń = spokój, wzrost, zaufanie
+     ========================================================== */
+
+  /* Tła */
+  --color-bg:           #FAFAF7; /* główne tło strony — ciepła biel, nie czysta */
+  --color-bg-secondary: #F2F5F0; /* tło sekcji, kart — delikatny zielony odcień */
+  --color-bg-elevated:  #FFFFFF; /* karty "uniesione" — czysta biel z cieniem */
+
+  /* Zieleń — główny kolor projektu
+     900 = najciemniejszy, 50 = najjaśniejszy */
+  --color-green-900: #1A3D2B;
+  --color-green-700: #2D6A4F;
+  --color-green-500: #40916C; /* główny kolor przycisków i akcentów */
+  --color-green-300: #74C69D;
+  --color-green-100: #D8F3DC;
+  --color-green-50:  #F0FFF4; /* hover stany */
+
+  /* Tekst */
+  --color-text-primary:   #1C1C1E; /* prawie czarny — jak Apple, nie agresywny */
+  --color-text-secondary: #6E6E73; /* opisy, podpisy */
+  --color-text-muted:     #AEAEB2; /* placeholdery, disabled */
+
+  /* Linie i obramowania */
+  --color-border:        #E5E7EB;
+  --color-border-subtle: #F0F0F0;
+
+  /* Akcenty specjalne */
+  --color-gold:    #B8860B; /* złoto — tylko dla premium momentów, używaj rzadko */
+  --color-error:   #D32F2F;
+  --color-warning: #F59E0B;
+  --color-success: #40916C;
+
+
+  /* ==========================================================
+     TYPOGRAFIA
+     DM Sans — zaokrąglony, spokojny, nowoczesny
+     DM Serif Display — elegancki kontrast dla dużych nagłówków
+     ========================================================== */
+
+  --font-sans:    'DM Sans', sans-serif;       /* cały UI, tekst, labele */
+  --font-display: 'DM Serif Display', serif;   /* duże nagłówki hero */
+
+  /* Skala typograficzna oparta na złotym podziale (x1.618)
+     Każdy stopień = poprzedni x 1.2 (modular scale) */
+  --text-xs:   0.694rem;  /*  ~11px — drobne adnotacje */
+  --text-sm:   0.833rem;  /*  ~13px — labele, tagi */
+  --text-base: 1rem;      /*   16px — podstawowy tekst */
+  --text-md:   1.2rem;    /*  ~19px — większy tekst */
+  --text-lg:   1.44rem;   /*  ~23px — małe nagłówki */
+  --text-xl:   1.728rem;  /*  ~28px — nagłówki sekcji */
+  --text-2xl:  2.074rem;  /*  ~33px — duże nagłówki */
+  --text-3xl:  2.488rem;  /*  ~40px — nagłówki hero */
+  --text-4xl:  2.986rem;  /*  ~48px — główny nagłówek strony */
+
+  /* Wagi czcionki */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+
+  /* Wysokość linii */
+  --leading-tight:   1.2; /* nagłówki */
+  --leading-normal:  1.5; /* tekst */
+  --leading-relaxed: 1.7; /* długie akapity — łatwiejsze czytanie */
+
+
+  /* ==========================================================
+     PRZESTRZEŃ — złoty podział (baza: 8px)
+     Każda wartość to poprzednia x ~1.618
+     Dzięki temu odstępy są harmonijne — oko to czuje
+     ========================================================== */
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  13px;
+  --space-4:  16px;
+  --space-5:  21px;
+  --space-6:  24px;
+  --space-8:  34px;
+  --space-10: 40px;
+  --space-12: 55px;
+  --space-16: 64px;
+  --space-20: 89px;
+  --space-24: 144px;
+
+
+  /* ==========================================================
+     ZAOKRĄGLENIA
+     Spójne z filozofią "miękkich" kształtów DM Sans
+     ========================================================== */
+
+  --radius-sm:   8px;
+  --radius-md:   13px;
+  --radius-lg:   21px;
+  --radius-xl:   34px;
+  --radius-full: 9999px; /* idealny okrąg / pill button */
+
+
+  /* ==========================================================
+     CIENIE — subtelne, jak Apple
+     Nigdy twarde box-shadow, zawsze miękkie i wielowarstwowe
+     ========================================================== */
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06),
+               0 1px 2px rgba(0,0,0,0.04);
+
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.07),
+               0 2px 6px rgba(0,0,0,0.05);
+
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10),
+               0 4px 12px rgba(0,0,0,0.06);
+
+  /* Cień zielony — dla przycisków i elementów akcentowych */
+  --shadow-green: 0 4px 20px rgba(64, 145, 108, 0.25);
+
+
+  /* ==========================================================
+     ANIMACJE
+     Subtelne, celowe — nigdy dla efektu, zawsze dla klarowności
+     ========================================================== */
+
+  --transition-fast:   150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow:   300ms ease;
+
+
+  /* ==========================================================
+     LAYOUT
+     ========================================================== */
+
+  --max-width:      1120px; /* maksymalna szerokość treści */
+  --max-width-text:  680px; /* szerokość kolumny tekstu (~złoty podział od 1120px) */
+  --header-height:    72px;
+
+}
+
+
+/* ==========================================================
+   TRYB CIEMNY — automatyczny gdy system użytkownika jest dark
+   Na razie tylko delikatna adaptacja, nie pełny dark mode
+   ========================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:           #1A1A1A;
+    --color-bg-secondary: #222822;
+    --color-bg-elevated:  #2A2A2A;
+    --color-text-primary:   #F5F5F5;
+    --color-text-secondary: #A0A0A0;
+    --color-text-muted:     #666666;
+    --color-border:        #333333;
+    --color-border-subtle: #2A2A2A;
+  }
+}
