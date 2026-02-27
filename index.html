@@ -447,7 +447,7 @@
         <div class="kalkulatory__siatka">
 
           <!-- Karta 1: Obligacje -->
-          <a href="pages/kalkulator-obligacji.html" class="kalkulator-karta">
+          <a href="pages/kalkulator-obligacji.html" class="kalkulator-karta" id="karta-obligacje">
             <div class="kalkulator-karta__ikona"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-600, #2D6A4F)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <polyline points="3 17 8 11 13 14 21 6"/>
   <line x1="3" y1="21" x2="21" y2="21"/>
@@ -466,7 +466,7 @@
           </a>
 
           <!-- Karta 2: Wolność finansowa -->
-          <a href="pages/kalkulator-wolnosci.html" class="kalkulator-karta">
+          <a href="pages/kalkulator-wolnosci.html" class="kalkulator-karta" id="karta-wolnosc">
             <div class="kalkulator-karta__ikona"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-600, #2D6A4F)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="9"/>
   <circle cx="12" cy="12" r="5"/>
@@ -486,7 +486,7 @@
           </a>
 
           <!-- Karta 3: Porównywarka -->
-          <a href="pages/porownywarka.html" class="kalkulator-karta">
+          <a href="pages/porownywarka.html" class="kalkulator-karta" id="karta-porownywarka">
             <div class="kalkulator-karta__ikona"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-600, #2D6A4F)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <line x1="12" y1="3" x2="12" y2="21"/>
   <path d="M5 7l7-4 7 4"/>
@@ -660,6 +660,37 @@
         if (ksiezyc) ksiezyc.style.display = 'block';
       }
     })();
+  </script>
+
+  <script src="js/tooltips.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Tooltips dla kart kalkulatorów
+      var karty = [
+        { id: 'karta-obligacje',    tooltipId: 'karta-obligacje' },
+        { id: 'karta-wolnosc',      tooltipId: 'karta-wolnosc' },
+        { id: 'karta-porownywarka', tooltipId: 'karta-porownywarka' },
+      ];
+
+      karty.forEach(function(k) {
+        var karta = document.getElementById(k.id);
+        if (!karta) return;
+
+        // Znajdź tytuł karty i dodaj ikonę ⓘ
+        var tytul = karta.querySelector('.kalkulator-karta__tytul');
+        if (!tytul || tytul.querySelector('[data-tooltip]')) return;
+
+        tytul.style.display    = 'flex';
+        tytul.style.alignItems = 'center';
+        tytul.style.gap        = '6px';
+
+        var ikona = stworzIkoneInfo(k.tooltipId);
+        // Na karcie kliknięcie ikony nie powinno przechodzić do linku
+        ikona.addEventListener('click', function(e) { e.preventDefault(); });
+        tytul.appendChild(ikona);
+      });
+    });
   </script>
 </body>
 </html>
