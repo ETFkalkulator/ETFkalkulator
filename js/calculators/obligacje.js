@@ -262,12 +262,18 @@ function aktualizujHintDoplaty(doplata, lata) {
     return;
   }
 
+  // Formatuj liczbę z separatorem tysięcy (spacja) — krótszy tekst
+  function fmt(n) {
+    return Math.round(n).toLocaleString('pl-PL') + ' zł';
+  }
+
   if (aktualnyOkres === 'miesiecznie') {
     var rocznie = doplata * 12;
     var lacznie = rocznie * lata;
-    hint.textContent = doplata + ' zł/mies. = ' + rocznie + ' zł/rok = ' + lacznie + ' zł łącznie';
+    // Podziel na dwie linie żeby nie rozszerzał kontenera
+    hint.innerHTML = fmt(doplata) + '/mies. = ' + fmt(rocznie) + '/rok<br>' + fmt(lacznie) + ' łącznie przez ' + lata + ' lat';
   } else {
-    hint.textContent = doplata + ' zł/rok ≈ ' + Math.round(doplata / 12) + ' zł/mies.';
+    hint.innerHTML = fmt(doplata) + '/rok = ' + fmt(Math.round(doplata / 12)) + '/mies.';
   }
 }
 
