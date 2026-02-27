@@ -636,27 +636,38 @@
 
   <script>
     function przelaczTryb() {
-      var body       = document.body;
-      var slonce     = document.getElementById('ikona-slonce');
-      var ksiezyc    = document.getElementById('ikona-ksiezyc');
-      var ciemny     = body.classList.toggle('dark-mode');
-
-      // Przełącz ikony
-      if (slonce)  slonce.style.display  = ciemny ? 'none'  : 'block';
-      if (ksiezyc) ksiezyc.style.display = ciemny ? 'block' : 'none';
-
-      // Zapamiętaj wybór użytkownika
-      localStorage.setItem('tryb', ciemny ? 'ciemny' : 'jasny');
+      var html    = document.documentElement;
+      var slonce  = document.getElementById('ikona-slonce');
+      var ksiezyc = document.getElementById('ikona-ksiezyc');
+      var aktualnieCiemny = html.classList.contains('dark-mode') ||
+        (!html.classList.contains('light-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (aktualnieCiemny) {
+        html.classList.remove('dark-mode');
+        html.classList.add('light-mode');
+        if (slonce)  slonce.style.display = 'block';
+        if (ksiezyc) ksiezyc.style.display = 'none';
+        localStorage.setItem('tryb', 'jasny');
+      } else {
+        html.classList.remove('light-mode');
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+        localStorage.setItem('tryb', 'ciemny');
+      }
     }
-
-    // Przywróć tryb po odświeżeniu
     (function() {
-      var tryb = localStorage.getItem('tryb');
-      if (tryb === 'ciemny') {
-        document.body.classList.add('dark-mode');
-        var slonce  = document.getElementById('ikona-slonce');
-        var ksiezyc = document.getElementById('ikona-ksiezyc');
-        if (slonce)  slonce.style.display  = 'none';
+      var html     = document.documentElement;
+      var zapisany = localStorage.getItem('tryb');
+      var slonce   = document.getElementById('ikona-slonce');
+      var ksiezyc  = document.getElementById('ikona-ksiezyc');
+      if (zapisany === 'ciemny') {
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+      } else if (zapisany === 'jasny') {
+        html.classList.add('light-mode');
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (slonce)  slonce.style.display = 'none';
         if (ksiezyc) ksiezyc.style.display = 'block';
       }
     })();

@@ -496,21 +496,36 @@
   </style>
 
   <style id="dark-mode-styles">
-    body.dark-mode {
-      --color-bg: #1C1C1E;
-      --color-bg-secondary: #2C2C2E;
-      --color-bg-elevated: #3A3A3C;
-      --color-text-primary: #F5F5F7;
-      --color-text-secondary: #AEAEB2;
-      --color-text-muted: #6E6E73;
-      --color-border: #48484A;
-      --color-border-subtle: #3A3A3C;
-      --color-green-50: #1a2e23;
-      --color-green-100: #1f3829;
+    /* Dark mode przez klasę na html — nadpisuje CSS variables */
+    html.dark-mode {
+      --color-bg:              #1C1C1E;
+      --color-bg-secondary:    #2C2C2E;
+      --color-bg-elevated:     #3A3A3C;
+      --color-text-primary:    #F5F5F7;
+      --color-text-secondary:  #AEAEB2;
+      --color-text-muted:      #6E6E73;
+      --color-border:          #48484A;
+      --color-border-subtle:   #3A3A3C;
+      --color-green-50:        #1a2e23;
+      --color-green-100:       #1f3829;
     }
-    body.dark-mode .header {
+    /* Jasny tryb — nadpisuje systemowy dark mode */
+    html.light-mode {
+      --color-bg:              #F8F7F2;
+      --color-bg-secondary:    #F0EFE8;
+      --color-bg-elevated:     #FFFFFF;
+      --color-text-primary:    #1C1C1E;
+      --color-text-secondary:  #6E6E73;
+      --color-text-muted:      #AEAEB2;
+      --color-border:          #E5E7EB;
+      --color-border-subtle:   #F0F0F0;
+      --color-green-50:        #d8f3dc;
+      --color-green-100:       #b7e4c7;
+    }
+    html.dark-mode .header {
       background: rgba(28, 28, 30, 0.85);
     }
+    /* Płynne przejście */
     body, .header, .formularz-karta, .kafelek, .porownanie,
     .wykres-karta, .tabela-karta, .pojecie, .wynik-glowny {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
@@ -898,21 +913,49 @@
 
   <script>
     function przelaczTryb() {
-      var body    = document.body;
+      var html    = document.documentElement;
       var slonce  = document.getElementById('ikona-slonce');
       var ksiezyc = document.getElementById('ikona-ksiezyc');
-      var ciemny  = body.classList.toggle('dark-mode');
-      if (slonce)  slonce.style.display  = ciemny ? 'none'  : 'block';
-      if (ksiezyc) ksiezyc.style.display = ciemny ? 'block' : 'none';
-      localStorage.setItem('tryb', ciemny ? 'ciemny' : 'jasny');
+
+      var aktualnieCiemny = html.classList.contains('dark-mode') ||
+        (!html.classList.contains('light-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      if (aktualnieCiemny) {
+        // Przełącz na jasny
+        html.classList.remove('dark-mode');
+        html.classList.add('light-mode');
+        if (slonce)  slonce.style.display = 'block';
+        if (ksiezyc) ksiezyc.style.display = 'none';
+        localStorage.setItem('tryb', 'jasny');
+      } else {
+        // Przełącz na ciemny
+        html.classList.remove('light-mode');
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+        localStorage.setItem('tryb', 'ciemny');
+      }
     }
+
+    // Inicjalizacja — przywróć zapisany tryb lub zastosuj systemowy
     (function() {
-      if (localStorage.getItem('tryb') === 'ciemny') {
-        document.body.classList.add('dark-mode');
-        var s = document.getElementById('ikona-slonce');
-        var k = document.getElementById('ikona-ksiezyc');
-        if (s) s.style.display = 'none';
-        if (k) k.style.display = 'block';
+      var html    = document.documentElement;
+      var zapisany = localStorage.getItem('tryb');
+      var slonce  = document.getElementById('ikona-slonce');
+      var ksiezyc = document.getElementById('ikona-ksiezyc');
+
+      if (zapisany === 'ciemny') {
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+      } else if (zapisany === 'jasny') {
+        html.classList.add('light-mode');
+      } else {
+        // Brak zapisu — sprawdź systemowy
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          if (slonce)  slonce.style.display = 'none';
+          if (ksiezyc) ksiezyc.style.display = 'block';
+        }
       }
     })();
   </script>

@@ -152,15 +152,34 @@
    Na razie tylko delikatna adaptacja, nie pełny dark mode
    ========================================================== */
 
+/* Dark mode — przez klasę body (przycisk) LUB systemowy (prefers-color-scheme) */
+/* Zmienne dark mode */
+.dark-mode,
+.dark-mode :root {
+  --color-bg:              #1C1C1E;
+  --color-bg-secondary:    #2C2C2E;
+  --color-bg-elevated:     #3A3A3C;
+  --color-text-primary:    #F5F5F7;
+  --color-text-secondary:  #AEAEB2;
+  --color-text-muted:      #6E6E73;
+  --color-border:          #48484A;
+  --color-border-subtle:   #3A3A3C;
+  --color-green-50:        #1a2e23;
+  --color-green-100:       #1f3829;
+}
+
+/* Fallback: systemowy dark mode gdy JS wyłączony */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg:           #1A1A1A;
-    --color-bg-secondary: #222822;
-    --color-bg-elevated:  #2A2A2A;
-    --color-text-primary:   #F5F5F5;
-    --color-text-secondary: #A0A0A0;
-    --color-text-muted:     #666666;
-    --color-border:        #333333;
-    --color-border-subtle: #2A2A2A;
+  :root:not(.light-forced) {
+    --color-bg:              #1C1C1E;
+    --color-bg-secondary:    #2C2C2E;
+    --color-bg-elevated:     #3A3A3C;
+    --color-text-primary:    #F5F5F7;
+    --color-text-secondary:  #AEAEB2;
+    --color-text-muted:      #6E6E73;
+    --color-border:          #48484A;
+    --color-border-subtle:   #3A3A3C;
+    --color-green-50:        #1a2e23;
+    --color-green-100:       #1f3829;
   }
 }
