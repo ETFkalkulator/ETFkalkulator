@@ -38,8 +38,9 @@ body {
 .container {
   width: 100%;
   max-width: var(--max-width);
-  margin-inline: auto; /* margin-inline = margin-left + margin-right */
+  margin-inline: auto;
   padding-inline: var(--space-5);
+  overflow-x: hidden;
 }
 
 /* Wąski kontener dla tekstu — łatwiejsze czytanie */
