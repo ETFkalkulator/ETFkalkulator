@@ -11,6 +11,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
 
+    /* Hint "kliknij" na kafelkach — widoczny tylko na mobile */
+    @media (max-width: 768px) {
+      .kafelek::after {
+        content: 'Dotknij po więcej informacji';
+        display: block;
+        font-size: 10px;
+        color: var(--color-text-muted);
+        margin-top: var(--space-2);
+        opacity: 0.7;
+      }
+    }
+
     /* Fix: zapobiega poziomemu scrollowaniu i rozszerzaniu layoutu */
     html {
       overflow-x: hidden;
@@ -591,8 +603,9 @@
             <div class="form-group">
               <label class="form-label" for="input-kapital">Kapitał startowy</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-kapital" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
-                  value="10000" min="100" step="100" maxlength="10">
+                <input type="text" inputmode="decimal" id="input-kapital" class="form-input"
+                  value="10000" min="100" step="100" maxlength="10"
+                  onfocus="clearOnFocus(this, 10000)" onblur="restoreOnBlur(this, 10000)">
                 <span class="form-input-suffix">zł</span>
               </div>
             </div>
@@ -610,9 +623,10 @@
             <div class="form-group">
               <label class="form-label" for="input-stopa">Oprocentowanie rok 1</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-stopa" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
+                <input type="text" inputmode="decimal" id="input-stopa" class="form-input"
                   value="6.6" min="0" max="20" step="0.1" maxlength="5"
-                  aria-describedby="hint-stopa">
+                  aria-describedby="hint-stopa"
+                  onfocus="clearOnFocus(this, 6.6)" onblur="restoreOnBlur(this, 6.6)">
                 <span class="form-input-suffix">%</span>
               </div>
               <p class="form-hint" id="hint-stopa">
@@ -627,9 +641,10 @@
             <div class="form-group">
               <label class="form-label" for="input-doplata">Regularna dopłata</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-doplata" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
+                <input type="text" inputmode="decimal" id="input-doplata" class="form-input"
                   value="0" min="0" step="50" maxlength="8"
-                  aria-describedby="hint-doplata">
+                  aria-describedby="hint-doplata"
+                  onfocus="clearOnFocus(this, 0)" onblur="restoreOnBlur(this, 0)">
                 <span class="form-input-suffix">zł</span>
               </div>
               <!-- Przełącznik miesięcznie / rocznie -->
@@ -655,9 +670,10 @@
             <div class="form-group">
               <label class="form-label" for="input-inflacja">Oczekiwana inflacja</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-inflacja" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
+                <input type="text" inputmode="decimal" id="input-inflacja" class="form-input"
                   value="3.5" min="0" max="30" step="0.1" maxlength="5"
-                  aria-describedby="hint-inflacja">
+                  aria-describedby="hint-inflacja"
+                  onfocus="clearOnFocus(this, 3.5)" onblur="restoreOnBlur(this, 3.5)">
                 <span class="form-input-suffix">%</span>
               </div>
               <p class="form-hint" id="hint-inflacja">
@@ -670,8 +686,9 @@
             <div class="form-group">
               <label class="form-label" for="input-lokata">Oprocentowanie lokaty (do porównania)</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-lokata" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
-                  value="4.5" min="0" max="20" step="0.1" maxlength="5">
+                <input type="text" inputmode="decimal" id="input-lokata" class="form-input"
+                  value="4.5" min="0" max="20" step="0.1" maxlength="5"
+                  onfocus="clearOnFocus(this, 4.5)" onblur="restoreOnBlur(this, 4.5)">
                 <span class="form-input-suffix">%</span>
               </div>
             </div>
@@ -900,51 +917,20 @@
     })();
   </script>
 
-  <script id="debug-overflow">
-    document.addEventListener('DOMContentLoaded', function() {
-      function znajdzOverflow(moment) {
-        var szerokoscEkranu = window.innerWidth;
-        var winowajcy = [];
-        document.querySelectorAll('*').forEach(function(el) {
-          try {
-            var rect = el.getBoundingClientRect();
-            if (rect.right > szerokoscEkranu + 2) {
-              winowajcy.push(
-                el.tagName +
-                (el.id ? '#'+el.id : '') +
-                (el.className && typeof el.className === 'string' ? '.'+el.className.split(' ')[0] : '') +
-                ' prawy=' + Math.round(rect.right) +
-                ' szer=' + Math.round(rect.width) +
-                ' ekran=' + szerokoscEkranu
-              );
-            }
-          } catch(e) {}
-        });
-        if (winowajcy.length) {
-          alert('[' + moment + '] OVERFLOW:
-' + winowajcy.slice(0,5).join('
-'));
-        } else {
-          console.log('[' + moment + '] brak overflow, ekran=' + szerokoscEkranu);
-        }
+  <script>
+    // Wyczyść pole przy focus, przywróć domyślną przy blur jeśli puste
+    function clearOnFocus(el, domyslna) {
+      if (parseFloat(el.value) === domyslna) {
+        el.value = '';
       }
-
-      // Sprawdź przy starcie
-      setTimeout(function() { znajdzOverflow('START'); }, 500);
-
-      // Sprawdź gdy cokolwiek się wpisuje
-      document.querySelectorAll('input').forEach(function(inp) {
-        inp.addEventListener('focus', function() {
-          setTimeout(function() { znajdzOverflow('FOCUS:' + inp.id); }, 300);
-        });
-        inp.addEventListener('input', function() {
-          setTimeout(function() { znajdzOverflow('INPUT:' + inp.id + '=' + inp.value); }, 300);
-        });
-        inp.addEventListener('blur', function() {
-          setTimeout(function() { znajdzOverflow('BLUR:' + inp.id); }, 300);
-        });
-      });
-    });
+      el.select && el.select();
+    }
+    function restoreOnBlur(el, domyslna) {
+      if (el.value === '' || el.value === null) {
+        el.value = domyslna;
+        aktualizujKalkulator && aktualizujKalkulator();
+      }
+    }
   </script>
 </body>
 </html>
