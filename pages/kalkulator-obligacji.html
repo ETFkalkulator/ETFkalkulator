@@ -901,39 +901,47 @@
   </script>
 
   <script id="debug-overflow">
-    // Znajdź element który wychodzi poza ekran
     document.addEventListener('DOMContentLoaded', function() {
-      function znajdzOverflow() {
-        var szerokoscEkranu = document.documentElement.clientWidth;
+      function znajdzOverflow(moment) {
+        var szerokoscEkranu = window.innerWidth;
         var winowajcy = [];
-        
         document.querySelectorAll('*').forEach(function(el) {
-          var rect = el.getBoundingClientRect();
-          if (rect.right > szerokoscEkranu + 1) {
-            winowajcy.push({
-              element: el.tagName + (el.id ? '#'+el.id : '') + (el.className ? '.'+el.className.toString().split(' ')[0] : ''),
-              prawyKraj: Math.round(rect.right),
-              szerokosc: Math.round(rect.width),
-              ekran: szerokoscEkranu
-            });
-          }
+          try {
+            var rect = el.getBoundingClientRect();
+            if (rect.right > szerokoscEkranu + 2) {
+              winowajcy.push(
+                el.tagName +
+                (el.id ? '#'+el.id : '') +
+                (el.className && typeof el.className === 'string' ? '.'+el.className.split(' ')[0] : '') +
+                ' prawy=' + Math.round(rect.right) +
+                ' szer=' + Math.round(rect.width) +
+                ' ekran=' + szerokoscEkranu
+              );
+            }
+          } catch(e) {}
         });
-        
-        if (winowajcy.length > 0) {
-          console.warn('=== ELEMENTY WYCHODZĄCE POZA EKRAN ===');
-          winowajcy.forEach(function(w) {
-            console.warn(w.element + ' | prawy край: ' + w.prawyKraj + 'px | szerokość: ' + w.szerokosc + 'px | ekran: ' + w.ekran + 'px');
-          });
+        if (winowajcy.length) {
+          alert('[' + moment + '] OVERFLOW:
+' + winowajcy.slice(0,5).join('
+'));
         } else {
-          console.log('Brak overflow przy starcie');
+          console.log('[' + moment + '] brak overflow, ekran=' + szerokoscEkranu);
         }
       }
-      
-      // Sprawdź przy starcie i przy każdym input
-      znajdzOverflow();
+
+      // Sprawdź przy starcie
+      setTimeout(function() { znajdzOverflow('START'); }, 500);
+
+      // Sprawdź gdy cokolwiek się wpisuje
       document.querySelectorAll('input').forEach(function(inp) {
+        inp.addEventListener('focus', function() {
+          setTimeout(function() { znajdzOverflow('FOCUS:' + inp.id); }, 300);
+        });
         inp.addEventListener('input', function() {
-          setTimeout(znajdzOverflow, 100);
+          setTimeout(function() { znajdzOverflow('INPUT:' + inp.id + '=' + inp.value); }, 300);
+        });
+        inp.addEventListener('blur', function() {
+          setTimeout(function() { znajdzOverflow('BLUR:' + inp.id); }, 300);
         });
       });
     });
