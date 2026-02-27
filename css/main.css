@@ -5,8 +5,9 @@ input[type="email"],
 select {
   min-width: 0;
   max-width: 100%;
-  /* Zapobiega auto-zoom na iOS przy focusie */
-  font-size: max(16px, 1rem);
+  width: 100%;
+  /* iOS: font-size >= 16px zapobiega auto-zoom który przesuwa layout */
+  font-size: 16px;
 }
 
 /* ============================================================
@@ -268,6 +269,7 @@ body {
 .form-input {
   width: 100%;
   min-width: 0;
+  max-width: 100%;
   padding: var(--space-3) var(--space-4);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
