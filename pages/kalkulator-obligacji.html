@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Kalkulator Obligacji Skarbowych — EDO, ROS, ROD | ETFkalkulator.pl</title>
   <meta name="description" content="Oblicz realny zysk z obligacji skarbowych EDO, ROS i ROD po podatku Belki i inflacji. Bezpłatny kalkulator dla polskich inwestorów.">
   <link rel="stylesheet" href="../css/reset.css">
@@ -205,6 +205,52 @@
       gap: var(--space-3);
     }
     @media (max-width: 500px) { .wyniki-siatka { grid-template-columns: 1fr; } }
+
+    /* Mobile — wyśrodkowanie i czytelność */
+    @media (max-width: 640px) {
+      .page-hero { padding-block: var(--space-8) var(--space-4); }
+      .page-hero__bread { font-size: var(--text-xs); }
+
+      .wynik-glowny {
+        padding: var(--space-8) var(--space-6);
+      }
+      .wynik-glowny__wartosc {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+      }
+
+      .kafelek {
+        padding: var(--space-4);
+        text-align: center;
+      }
+      .kafelek__etykieta {
+        justify-content: center;
+      }
+      .kafelek__podpis {
+        text-align: center;
+      }
+
+      .porownanie__wiersz {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-1);
+      }
+
+      .wykres-karta__naglowek {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .formularz-sekcja {
+        text-align: left;
+      }
+
+      .tabela {
+        font-size: var(--text-xs);
+      }
+      .tabela td, .tabela th {
+        padding: var(--space-2);
+      }
+    }
 
     .kafelek {
       background: var(--color-bg-elevated);
