@@ -317,28 +317,36 @@
     .hero__title   { animation: fadeInUp 0.5s ease 0.1s both; }
     .hero__subtitle{ animation: fadeInUp 0.5s ease 0.2s both; }
     .hero__cta     { animation: fadeInUp 0.5s ease 0.3s both; }
+
+    html.dark-mode {
+      --color-bg:              #1C1C1E;
+      --color-bg-secondary:    #2C2C2E;
+      --color-bg-elevated:     #3A3A3C;
+      --color-text-primary:    #F5F5F7;
+      --color-text-secondary:  #AEAEB2;
+      --color-text-muted:      #6E6E73;
+      --color-border:          #48484A;
+      --color-border-subtle:   #3A3A3C;
+      --color-green-50:        #1a2e23;
+      --color-green-100:       #1f3829;
+    }
+    html.light-mode {
+      --color-bg:              #F8F7F2;
+      --color-bg-secondary:    #F0EFE8;
+      --color-bg-elevated:     #FFFFFF;
+      --color-text-primary:    #1C1C1E;
+      --color-text-secondary:  #6E6E73;
+      --color-text-muted:      #AEAEB2;
+      --color-border:          #E5E7EB;
+      --color-border-subtle:   #F0F0F0;
+      --color-green-50:        #d8f3dc;
+      --color-green-100:       #b7e4c7;
+    }
+    html.dark-mode .header { background: rgba(28,28,30,0.9); }
   </style>
 
   <style>
     /* Dark mode */
-    body.dark-mode {
-      --color-bg: #1C1C1E;
-      --color-bg-secondary: #2C2C2E;
-      --color-bg-elevated: #3A3A3C;
-      --color-text-primary: #F5F5F7;
-      --color-text-secondary: #AEAEB2;
-      --color-text-muted: #6E6E73;
-      --color-border: #48484A;
-      --color-border-subtle: #3A3A3C;
-      --color-green-50: #1a2e23;
-      --color-green-100: #1f3829;
-    }
-    body.dark-mode .header {
-      background: rgba(28, 28, 30, 0.85);
-    }
-    body.dark-mode .newsletter__input {
-      background: rgba(255,255,255,0.08);
-    }
     /* Płynne przejście */
     body, .header, .card, .kafelek, .formularz-karta, .wyniki-kolumna,
     .porownanie, .wykres-karta, .tabela-karta, .pojecie {
@@ -635,42 +643,6 @@
 
 
   <script>
-    function przelaczTryb() {
-      var html    = document.documentElement;
-      var slonce  = document.getElementById('ikona-slonce');
-      var ksiezyc = document.getElementById('ikona-ksiezyc');
-      var aktualnieCiemny = html.classList.contains('dark-mode') ||
-        (!html.classList.contains('light-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      if (aktualnieCiemny) {
-        html.classList.remove('dark-mode');
-        html.classList.add('light-mode');
-        if (slonce)  slonce.style.display = 'block';
-        if (ksiezyc) ksiezyc.style.display = 'none';
-        localStorage.setItem('tryb', 'jasny');
-      } else {
-        html.classList.remove('light-mode');
-        html.classList.add('dark-mode');
-        if (slonce)  slonce.style.display = 'none';
-        if (ksiezyc) ksiezyc.style.display = 'block';
-        localStorage.setItem('tryb', 'ciemny');
-      }
-    }
-    (function() {
-      var html     = document.documentElement;
-      var zapisany = localStorage.getItem('tryb');
-      var slonce   = document.getElementById('ikona-slonce');
-      var ksiezyc  = document.getElementById('ikona-ksiezyc');
-      if (zapisany === 'ciemny') {
-        html.classList.add('dark-mode');
-        if (slonce)  slonce.style.display = 'none';
-        if (ksiezyc) ksiezyc.style.display = 'block';
-      } else if (zapisany === 'jasny') {
-        html.classList.add('light-mode');
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        if (slonce)  slonce.style.display = 'none';
-        if (ksiezyc) ksiezyc.style.display = 'block';
-      }
-    })();
   </script>
 
   <script src="js/tooltips.js"></script>
@@ -702,6 +674,48 @@
         tytul.appendChild(ikona);
       });
     });
+  </script>
+
+  <script>
+    function przelaczTryb() {
+      var html    = document.documentElement;
+      var slonce  = document.getElementById('ikona-slonce');
+      var ksiezyc = document.getElementById('ikona-ksiezyc');
+      var ciemny  = html.classList.contains('dark-mode') ||
+        (!html.classList.contains('light-mode') &&
+         window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      if (ciemny) {
+        html.classList.remove('dark-mode');
+        html.classList.add('light-mode');
+        if (slonce)  slonce.style.display = 'block';
+        if (ksiezyc) ksiezyc.style.display = 'none';
+        localStorage.setItem('etf-tryb', 'jasny');
+      } else {
+        html.classList.remove('light-mode');
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+        localStorage.setItem('etf-tryb', 'ciemny');
+      }
+    }
+
+    // Inicjalizacja przy ładowaniu strony
+    (function() {
+      var html     = document.documentElement;
+      var zapisany = localStorage.getItem('etf-tryb');
+      var slonce   = document.getElementById('ikona-slonce');
+      var ksiezyc  = document.getElementById('ikona-ksiezyc');
+      var systemCiemny = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (zapisany === 'ciemny' || (!zapisany && systemCiemny)) {
+        html.classList.add('dark-mode');
+        if (slonce)  slonce.style.display = 'none';
+        if (ksiezyc) ksiezyc.style.display = 'block';
+      } else if (zapisany === 'jasny') {
+        html.classList.add('light-mode');
+      }
+    })();
   </script>
 </body>
 </html>
