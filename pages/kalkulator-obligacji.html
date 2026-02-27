@@ -591,7 +591,7 @@
             <div class="form-group">
               <label class="form-label" for="input-kapital">Kapitał startowy</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-kapital" class="form-input"
+                <input type="text" inputmode="decimal" id="input-kapital" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
                   value="10000" min="100" step="100" maxlength="10">
                 <span class="form-input-suffix">zł</span>
               </div>
@@ -610,7 +610,7 @@
             <div class="form-group">
               <label class="form-label" for="input-stopa">Oprocentowanie rok 1</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-stopa" class="form-input"
+                <input type="text" inputmode="decimal" id="input-stopa" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
                   value="6.6" min="0" max="20" step="0.1" maxlength="5"
                   aria-describedby="hint-stopa">
                 <span class="form-input-suffix">%</span>
@@ -627,7 +627,7 @@
             <div class="form-group">
               <label class="form-label" for="input-doplata">Regularna dopłata</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-doplata" class="form-input"
+                <input type="text" inputmode="decimal" id="input-doplata" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
                   value="0" min="0" step="50" maxlength="8"
                   aria-describedby="hint-doplata">
                 <span class="form-input-suffix">zł</span>
@@ -655,7 +655,7 @@
             <div class="form-group">
               <label class="form-label" for="input-inflacja">Oczekiwana inflacja</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-inflacja" class="form-input"
+                <input type="text" inputmode="decimal" id="input-inflacja" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
                   value="3.5" min="0" max="30" step="0.1" maxlength="5"
                   aria-describedby="hint-inflacja">
                 <span class="form-input-suffix">%</span>
@@ -670,7 +670,7 @@
             <div class="form-group">
               <label class="form-label" for="input-lokata">Oprocentowanie lokaty (do porównania)</label>
               <div class="form-input-wrapper">
-                <input type="text" inputmode="decimal" id="input-lokata" class="form-input"
+                <input type="text" inputmode="decimal" id="input-lokata" class="form-input" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box;-webkit-appearance:none;"
                   value="4.5" min="0" max="20" step="0.1" maxlength="5">
                 <span class="form-input-suffix">%</span>
               </div>
@@ -898,6 +898,45 @@
         if (k) k.style.display = 'block';
       }
     })();
+  </script>
+
+  <script id="debug-overflow">
+    // Znajdź element który wychodzi poza ekran
+    document.addEventListener('DOMContentLoaded', function() {
+      function znajdzOverflow() {
+        var szerokoscEkranu = document.documentElement.clientWidth;
+        var winowajcy = [];
+        
+        document.querySelectorAll('*').forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.right > szerokoscEkranu + 1) {
+            winowajcy.push({
+              element: el.tagName + (el.id ? '#'+el.id : '') + (el.className ? '.'+el.className.toString().split(' ')[0] : ''),
+              prawyKraj: Math.round(rect.right),
+              szerokosc: Math.round(rect.width),
+              ekran: szerokoscEkranu
+            });
+          }
+        });
+        
+        if (winowajcy.length > 0) {
+          console.warn('=== ELEMENTY WYCHODZĄCE POZA EKRAN ===');
+          winowajcy.forEach(function(w) {
+            console.warn(w.element + ' | prawy край: ' + w.prawyKraj + 'px | szerokość: ' + w.szerokosc + 'px | ekran: ' + w.ekran + 'px');
+          });
+        } else {
+          console.log('Brak overflow przy starcie');
+        }
+      }
+      
+      // Sprawdź przy starcie i przy każdym input
+      znajdzOverflow();
+      document.querySelectorAll('input').forEach(function(inp) {
+        inp.addEventListener('input', function() {
+          setTimeout(znajdzOverflow, 100);
+        });
+      });
+    });
   </script>
 </body>
 </html>
