@@ -313,23 +313,46 @@ body {
 
 /* Pole z ikoną waluty */
 .form-input-wrapper {
-  position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
   min-width: 0;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  transition: border-color var(--transition-fast);
+  overflow: hidden;
+}
+
+.form-input-wrapper:focus-within {
+  border-color: var(--color-green-500);
+  box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.12);
 }
 
 .form-input-wrapper .form-input {
-  padding-right: var(--space-10);
+  /* Input bez własnego border — wrapper go ma */
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding-right: var(--space-2);
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+}
+
+.form-input-wrapper .form-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .form-input-suffix {
-  position: absolute;
-  right: var(--space-4);
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
+  padding-right: var(--space-4);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
-  pointer-events: none; /* kliknięcie "przenika" do inputa */
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 /* Select — lista rozwijana */
