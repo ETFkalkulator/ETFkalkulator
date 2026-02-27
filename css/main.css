@@ -256,6 +256,7 @@ body {
 
 .form-input {
   width: 100%;
+  min-width: 0;
   padding: var(--space-3) var(--space-4);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -294,6 +295,8 @@ body {
 /* Pole z ikoną waluty */
 .form-input-wrapper {
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
 
 .form-input-wrapper .form-input {

@@ -11,6 +11,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
 
+    /* Fix: pola input nie rozszerzają layoutu na mobile */
+    .form-input,
+    .form-select {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+    .form-input-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+    .form-group {
+      min-width: 0;
+      width: 100%;
+    }
+    .formularz-pola {
+      min-width: 0;
+      width: 100%;
+    }
+    .formularz-karta {
+      min-width: 0;
+      overflow: hidden;
+    }
+
     /* Fix: zapobiega przesunięciu viewport w poziomie na mobile */
     html, body {
       overflow-x: hidden;
