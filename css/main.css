@@ -1,3 +1,14 @@
+/* Fix globalne: inputy nie rozszerzają layoutu na mobile */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+select {
+  min-width: 0;
+  max-width: 100%;
+  /* Zapobiega auto-zoom na iOS przy focusie */
+  font-size: max(16px, 1rem);
+}
+
 /* ============================================================
    main.css — ETFkalkulator.pl
    Globalne style używane na każdej podstronie.
