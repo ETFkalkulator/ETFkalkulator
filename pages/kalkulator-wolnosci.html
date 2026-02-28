@@ -317,9 +317,17 @@
             <svg id="ikona-ksiezyc" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
         </nav>
+          <button class="hamburger" id="hamburger" onclick="przelaczMenu()" aria-label="Menu"><span class="hamburger__linia"></span><span class="hamburger__linia"></span><span class="hamburger__linia"></span></button>
       </div>
     </div>
   </header>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobilne">
+    <a href="../pages/kalkulator-obligacji.html">Obligacje skarbowe</a>
+    <a href="../pages/kalkulator-wolnosci.html" class="aktywna">Wolnosc finansowa</a>
+    <a href="../pages/porownywarka.html">Porownywarka ETF</a>
+    <div class="mobile-menu__akcje"><a href="../index.html#newsletter" class="btn btn--primary btn--sm" style="display:inline-flex">Newsletter</a></div>
+  </nav>
 
   <main>
     <div class="container">
@@ -614,6 +622,26 @@
     }
 
     // Dark mode
+
+    function przelaczMenu() {
+      var menu = document.getElementById("mobile-menu");
+      var btn  = document.getElementById("hamburger");
+      var otwarty = menu.classList.toggle("mobile-menu--widoczne");
+      btn.classList.toggle("hamburger--otwarty", otwarty);
+      document.body.style.overflow = otwarty ? "hidden" : "";
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      var menu = document.getElementById("mobile-menu");
+      if (!menu) return;
+      menu.querySelectorAll("a").forEach(function(a) {
+        a.addEventListener("click", function() {
+          menu.classList.remove("mobile-menu--widoczne");
+          var btn = document.getElementById("hamburger");
+          if (btn) btn.classList.remove("hamburger--otwarty");
+          document.body.style.overflow = "";
+        });
+      });
+    });
     function przelaczTryb() {
       var html    = document.documentElement;
       var slonce  = document.getElementById('ikona-slonce');

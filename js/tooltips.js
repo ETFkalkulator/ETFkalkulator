@@ -361,6 +361,7 @@ document.head.appendChild(style);
 function podepnijTooltips() {
 
   var kafelkiIds = [
+    /* Moduł 1 — Obligacje */
     'wynik-kapital-koncowy',
     'wynik-wklad-wlasny',
     'wynik-doplata-laczna',
@@ -372,20 +373,30 @@ function podepnijTooltips() {
     'wynik-cagr-realny',
     'wynik-obligacje-porownanie',
     'wynik-lokata-porownanie',
+    /* Moduł 2 — Wolność Finansowa */
+    'wf-wynik-cel',
+    'wf-wynik-lata',
+    'wf-wynik-wymagane',
+    'wf-wynik-fire-trwa',
+    'wf-wynik-stopa-realna',
+    /* Moduł 3 — Porównywarka */
+    'por-etf-kapital',
+    'por-obligacje-kapital',
+    'por-lokata-kapital',
   ];
 
   kafelkiIds.forEach(function(id) {
     var el = document.getElementById(id);
     if (!el || !TOOLTIPS[id]) return;
 
-    var kafelek = el.closest('.kafelek, .porownanie__wiersz, .wynik-glowny');
+    var kafelek = el.closest('.kafelek, .porownanie__wiersz, .wynik-glowny, .wynik-glowny-fire, .por-panel, .por-wiersz');
     if (!kafelek) return;
 
     // Dodaj efekt kliknięcia na kafelek (mobile)
     dodajEfektKafelka(kafelek, id);
 
     // Dodaj ikonę ⓘ do etykiety (desktop)
-    var etykieta = kafelek.querySelector('.kafelek__etykieta, .porownanie__nazwa, .wynik-glowny__etykieta');
+    var etykieta = kafelek.querySelector('.kafelek__etykieta, .porownanie__nazwa, .wynik-glowny__etykieta, .wynik-glowny-fire__etykieta, .por-panel__tytul, .por-wiersz__label');
     if (!etykieta || etykieta.querySelector('[data-tooltip]')) return;
     etykieta.style.display    = 'flex';
     etykieta.style.alignItems = 'center';

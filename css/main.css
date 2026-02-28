@@ -610,3 +610,91 @@ html, body {
   white-space: normal;
   min-width: 0;
 }
+
+/* ==========================================================
+   HAMBURGER MENU — mobile nawigacja
+   ========================================================== */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  padding: 8px;
+  flex-shrink: 0;
+  transition: border-color var(--transition-fast);
+}
+.hamburger:hover { border-color: var(--color-green-500); }
+.hamburger__linia {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-text-secondary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.hamburger--otwarty .hamburger__linia:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger--otwarty .hamburger__linia:nth-child(2) {
+  opacity: 0; transform: scaleX(0);
+}
+.hamburger--otwarty .hamburger__linia:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobilne menu — wysuwa się z góry */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0; right: 0;
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-6);
+  z-index: 99;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.mobile-menu--widoczne {
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobile-menu a {
+  display: block;
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover,
+.mobile-menu a.aktywna { color: var(--color-green-500); }
+.mobile-menu__akcje {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .hamburger { display: flex; }
+  .header__nav a { display: none; }
+  .header__nav .btn { display: none; }
+  .mobile-menu { display: flex; }
+}
