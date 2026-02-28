@@ -61,9 +61,11 @@
       padding: var(--space-5) var(--space-6);
       font-size: var(--text-base);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: var(--space-3);
       box-shadow: 0 4px 20px rgba(64,145,108,0.3);
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     /* Trzy panele wyników */
@@ -72,7 +74,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-4);
     }
-    @media (max-width: 700px) {
+    @media (max-width: 860px) {
       .por-panele { grid-template-columns: 1fr; }
     }
 
@@ -112,18 +114,19 @@
 
     .por-wiersz {
       display: flex; justify-content: space-between; align-items: baseline;
-      gap: var(--space-2);
+      gap: var(--space-2); min-width: 0;
     }
     .por-wiersz__label {
       font-size: var(--text-xs); color: var(--color-text-muted);
-      white-space: nowrap;
+      white-space: nowrap; flex-shrink: 1; min-width: 0;
     }
     .por-wiersz__wartosc {
       font-size: var(--text-sm); font-weight: var(--weight-semibold);
       color: var(--color-text-primary); text-align: right;
+      flex-shrink: 0; white-space: nowrap;
     }
     .por-wiersz__wartosc--glowna {
-      font-size: var(--text-xl); color: var(--color-text-primary);
+      font-size: var(--text-lg); color: var(--color-text-primary);
     }
     .por-wiersz__wartosc--zielony { color: var(--color-green-600) !important; }
     .por-wiersz__wartosc--czerwony { color: var(--color-error) !important; }
