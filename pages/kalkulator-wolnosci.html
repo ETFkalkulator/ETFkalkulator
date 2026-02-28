@@ -279,25 +279,36 @@
       .wynik-glowny-fire { padding: var(--space-8) var(--space-5); }
     }
 
-    /* Dark mode inline */
-    html.dark-mode {
-      --color-bg: #1C1C1E; --color-bg-secondary: #2C2C2E;
-      --color-bg-elevated: #3A3A3C; --color-text-primary: #F5F5F7;
-      --color-text-secondary: #AEAEB2; --color-text-muted: #6E6E73;
-      --color-border: #48484A; --color-border-subtle: #3A3A3C;
-      --color-green-50: #1a2e23; --color-green-100: #1f3829;
-    }
-    html.light-mode {
-      --color-bg: #F8F7F2 !important; --color-bg-secondary: #F0EFE8 !important;
-      --color-bg-elevated: #FFFFFF !important; --color-text-primary: #1C1C1E !important;
-      --color-text-secondary: #6E6E73 !important; --color-text-muted: #AEAEB2 !important;
-      --color-border: #E5E7EB !important; --color-border-subtle: #F0F0F0 !important;
-      --color-green-50: #d8f3dc !important; --color-green-100: #b7e4c7 !important;
-    }
-    html.dark-mode .header { background: rgba(28,28,30,0.9); }
-    body, .header, .formularz-karta, .kafelek, .wykres-karta, .pojecie, .progress-section {
+    /* Dark mode inline */    body, .header, .formularz-karta, .kafelek, .wykres-karta, .pojecie, .progress-section {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
+  </style>
+  <style id="dark-mode-styles">
+    html.dark-mode {
+      --color-bg:              #1C1C1E;
+      --color-bg-secondary:    #2C2C2E;
+      --color-bg-elevated:     #3A3A3C;
+      --color-text-primary:    #F5F5F7;
+      --color-text-secondary:  #AEAEB2;
+      --color-text-muted:      #6E6E73;
+      --color-border:          #48484A;
+      --color-border-subtle:   #3A3A3C;
+      --color-green-50:        #1a2e23;
+      --color-green-100:       #1f3829;
+    }
+    html.light-mode {
+      --color-bg:              #F8F7F2;
+      --color-bg-secondary:    #F0EFE8;
+      --color-bg-elevated:     #FFFFFF;
+      --color-text-primary:    #1C1C1E;
+      --color-text-secondary:  #6E6E73;
+      --color-text-muted:      #AEAEB2;
+      --color-border:          #E5E7EB;
+      --color-border-subtle:   #F0F0F0;
+      --color-green-50:        #d8f3dc;
+      --color-green-100:       #b7e4c7;
+    }
+    html.dark-mode .header { background: rgba(28,28,30,0.9); }
   </style>
 </head>
 
@@ -307,21 +318,29 @@
     <div class="container">
       <div class="header__inner">
         <a href="../index.html" class="header__logo">ETF<span>kalkulator</span>.pl</a>
-        <nav class="header__nav" aria-label="Nawigacja główna">
+                        <nav class="header__nav" aria-label="Nawigacja główna">
           <a href="kalkulator-obligacji.html">Obligacje</a>
           <a href="kalkulator-wolnosci.html" style="color: var(--color-green-500)">Wolność finansowa</a>
           <a href="porownywarka.html">Porównywarka</a>
-          <a href="../index.html#newsletter" class="btn btn--sm" style="border: 1.5px solid var(--color-green-300); color: var(--color-green-700); background: white; border-radius: var(--radius-full);">Newsletter</a>
-          <button id="btn-darkmode" onclick="przelaczTryb()" aria-label="Przełącz tryb" style="background:none;border:1.5px solid var(--color-border);border-radius:var(--radius-full);width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-secondary);flex-shrink:0;">
-            <svg id="ikona-slonce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <svg id="ikona-ksiezyc" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
+          <button id="btn-darkmode" onclick="przelaczTryb()" aria-label="Przełącz tryb ciemny/jasny" style="width: 38px; height: 38px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); background: var(--color-bg-elevated); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); flex-shrink: 0;">
+      <svg id="ikona-slonce" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg id="ikona-ksiezyc" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+    <a href="../index.html#newsletter" class="btn btn--sm" style="border: 1.5px solid var(--color-green-300); color: var(--color-green-700); background: white; border-radius: var(--radius-full);">Newsletter</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <div class="mobile-nav-bar" id="mobile-nav-bar">
+    <div class="mobile-nav-bar" id="mobile-nav-bar">
     <div class="mobile-nav-bar__inner">
     <a href="../pages/kalkulator-obligacji.html" class="mobile-nav-bar__link">Obligacje</a>
     <span class="mobile-nav-bar__separator"></span>
@@ -609,14 +628,10 @@
   <script src="../js/calculators/wolnosc.js"></script>
   <script src="../js/tooltips.js"></script>
 
-  <script>
-    // Synchronizuj label "za X lat"
-    document.getElementById('wf-lata-cel').addEventListener('input', function() {
-      var el = document.getElementById('wf-lata-cel-label');
-      if (el) el.textContent = this.value || '20';
-    });
+  
 
-    // Czyszczenie pól przy focus
+  
+  <script>
     function clearOnFocus(el, domyslna) {
       if (parseFloat(el.value) === domyslna) el.value = '';
       el.select && el.select();
@@ -624,12 +639,8 @@
     function restoreOnBlur(el, domyslna) {
       if (el.value === '' || el.value === null) {
         el.value = domyslna;
-        aktualizujWolnosc && aktualizujWolnosc();
       }
     }
-
-    // Dark mode
-    });
     function przelaczTryb() {
       var html    = document.documentElement;
       var slonce  = document.getElementById('ikona-slonce');
@@ -638,26 +649,26 @@
         (!html.classList.contains('light-mode') &&
          window.matchMedia('(prefers-color-scheme: dark)').matches);
       if (ciemny) {
-        html.classList.remove('dark-mode'); html.classList.add('light-mode');
+        html.classList.remove('dark-mode');
+        html.classList.add('light-mode');
         if (slonce)  slonce.style.display = 'block';
         if (ksiezyc) ksiezyc.style.display = 'none';
         localStorage.setItem('etf-tryb', 'jasny');
       } else {
-        html.classList.remove('light-mode'); html.classList.add('dark-mode');
+        html.classList.remove('light-mode');
+        html.classList.add('dark-mode');
         if (slonce)  slonce.style.display = 'none';
         if (ksiezyc) ksiezyc.style.display = 'block';
         localStorage.setItem('etf-tryb', 'ciemny');
       }
-      // Odśwież wykresy po zmianie trybu
-      setTimeout(function() { aktualizujWolnosc && aktualizujWolnosc(); }, 350);
     }
     (function() {
-      var html     = document.documentElement;
-      var zapisany = localStorage.getItem('etf-tryb');
-      var slonce   = document.getElementById('ikona-slonce');
-      var ksiezyc  = document.getElementById('ikona-ksiezyc');
-      var sysCiemny = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (zapisany === 'ciemny' || (!zapisany && sysCiemny)) {
+      var html         = document.documentElement;
+      var zapisany     = localStorage.getItem('etf-tryb');
+      var slonce       = document.getElementById('ikona-slonce');
+      var ksiezyc      = document.getElementById('ikona-ksiezyc');
+      var systemCiemny = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (zapisany === 'ciemny' || (!zapisany && systemCiemny)) {
         html.classList.add('dark-mode');
         if (slonce)  slonce.style.display = 'none';
         if (ksiezyc) ksiezyc.style.display = 'block';
@@ -666,6 +677,5 @@
       }
     })();
   </script>
-
 </body>
 </html>
