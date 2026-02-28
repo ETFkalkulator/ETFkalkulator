@@ -91,7 +91,7 @@
   --transition-slow:   400ms ease;
 
   /* --- Layout --- */
-  --max-width:      1200px;
+  --max-width:      960px;
   --max-width-text: 680px;
   --header-height:  64px;
 }
