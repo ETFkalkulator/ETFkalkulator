@@ -89,6 +89,9 @@ const pobierzWartosc = (idPola, domyslna = 0) => {
  * Zaokrągla liczbę do n miejsc po przecinku
  * Przykład: zaokraglij(10500.567, 2) → 10500.57
  */
+const zaokraglij = (liczba, miejsca = 2) => {
+  return Math.round(liczba * Math.pow(10, miejsca)) / Math.pow(10, miejsca);
+};
 
 
 /* ----------------------------------------------------------
@@ -149,5 +152,19 @@ window.ETF.utils = {
   formatujLiczbe,
   czyPoprawnaCyfra,
   pobierzWartosc,
+  zaokraglij,
   animujLiczbe,
 };
+
+/* ----------------------------------------------------------
+   ALIASY GLOBALNE
+   Dla wygody — wszystkie kalkulatory mogą używać
+   tych funkcji bezpośrednio bez window.ETF.utils.
+   ---------------------------------------------------------- */
+window.formatujZl      = formatujZl;
+window.formatujProcent = formatujProcent;
+window.formatujLiczbe  = formatujLiczbe;
+window.czyPoprawnaCyfra= czyPoprawnaCyfra;
+window.pobierzWartosc  = pobierzWartosc;
+window.zaokraglij      = zaokraglij;
+window.animuj          = animujLiczbe;  /* alias: animuj() = animujLiczbe() */

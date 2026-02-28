@@ -20,7 +20,7 @@ var SCENARIUSZE_ETF = {
    OBLICZENIA DLA JEDNEJ STRATEGII
    ---------------------------------------------------------- */
 
-function obliczStrategię(params) {
+function obliczStrategie(params) {
   var kapital     = params.kapital;
   var doplata     = params.doplata;       // miesięczna
   var lata        = params.lata;
@@ -156,14 +156,14 @@ function obliczPorownanie() {
   var wspolne = { kapital, doplata, lata, inflacja, bezPodatku: wIKE };
 
   // Oblicz wszystkie strategie
-  var etf     = obliczStrategię({ ...wspolne, stopa: stopaETF });
-  var obligacje = obliczEDO({   ...wspolne, marza, stopaRok1 });
-  var lokata  = obliczStrategię({ ...wspolne, stopa: stopaLok });
+  var etf       = obliczStrategie(Object.assign({}, wspolne, { stopa: stopaETF }));
+  var obligacje = obliczEDO(Object.assign({}, wspolne, { marza: marza, stopaRok1: stopaRok1 }));
+  var lokata    = obliczStrategie(Object.assign({}, wspolne, { stopa: stopaLok }));
 
-  // Scenariusze ETF (bez IKE dla uczciwego porównania scenariuszy)
-  var scenPes = obliczStrategię({ ...wspolne, stopa: SCENARIUSZE_ETF.pesymistyczny.stopa });
-  var scenBaz = obliczStrategię({ ...wspolne, stopa: SCENARIUSZE_ETF.bazowy.stopa });
-  var scenOpt = obliczStrategię({ ...wspolne, stopa: SCENARIUSZE_ETF.optymistyczny.stopa });
+  // Scenariusze ETF
+  var scenPes = obliczStrategie(Object.assign({}, wspolne, { stopa: SCENARIUSZE_ETF.pesymistyczny.stopa }));
+  var scenBaz = obliczStrategie(Object.assign({}, wspolne, { stopa: SCENARIUSZE_ETF.bazowy.stopa }));
+  var scenOpt = obliczStrategie(Object.assign({}, wspolne, { stopa: SCENARIUSZE_ETF.optymistyczny.stopa }));
 
   // Wyznacz zwycięzcę
   var strategie = [
