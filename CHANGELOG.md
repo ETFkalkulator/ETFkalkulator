@@ -17,6 +17,34 @@
 
 ---
 
+## [2026-02] — Sesja 7: Hamburger menu, ikony tooltip M2/M3, mobile fixes
+
+### Dodano
+- **Hamburger menu** — mobilna nawigacja na wszystkich 3 stronach
+  - Pojawia się na ekranach ≤640px
+  - Animacja 3 kreski → X przy otwarciu
+  - Menu wysuwa się z góry z efektem fade+slide
+  - Blokuje scroll pod spodem gdy otwarte
+  - Zamyka się po kliknięciu w link
+  - Aktywna strona podświetlona na zielono
+- **Ikony ⓘ w module 2 i 3** — identyczny system co moduł 1
+  - M2: cel FIRE, lata do wolności, wymagane oszczędności, trwałość kapitału, realna stopa
+  - M3: kapitał końcowy ETF, obligacje, lokata
+  - Desktop: hover dymek, Mobile: kliknięcie → modal bottom sheet
+  - `tooltips.js` rozszerzone o nowe selektory (.wynik-glowny-fire, .por-panel)
+
+### Naprawiono
+- **Duplikat `zaokraglij`** — moduł 1 przestał działać po dodaniu aliasów globalnych do utils.js
+  - Usunięto lokalną definicję z obligacje.js, zostaje jedna z utils.js
+- **Mobile overflow (globalny fix w main.css)** — formularz rozszerzał ekran przy wpisywaniu
+  - `min-width: 0` na wszystkich flex/grid dzieciach
+  - `font-size: 16px` na `.form-input` — zapobiega auto-zoom iOS
+  - `overflow-x: hidden` na kontenerach
+- **Porównywarka mobile** — panele w jednej kolumnie na ≤860px, wartości nie ucinane
+- **Banner zwycięzcy** — tekst zawija się zamiast wychodzić poza ekran
+
+---
+
 ## [2026-02] — Sesja 5+6: Mobile UX, Moduł 2
 
 ### Dodano
