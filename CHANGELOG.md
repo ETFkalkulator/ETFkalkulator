@@ -7,13 +7,57 @@
 ### Następna sesja
 - [ ] GitHub Pages — publikacja strony pod publicznym URL
 - [ ] Testowanie na telefonie
-- [ ] `pages/kalkulator-wolnosci.html` — Moduł 2
-- [ ] `js/calculators/wolnosc.js` — logika Modułu 2
+- [x] `pages/kalkulator-wolnosci.html` — Moduł 2 ✅
+- [x] `js/calculators/wolnosc.js` — logika Modułu 2 ✅
 - [ ] `pages/porownywarka.html` — Moduł 3
 - [ ] `php/newsletter.php` — zapis do MailerLite
 - [ ] Cookie consent banner
 - [ ] Google Analytics 4
 - [ ] Favicon
+
+---
+
+## [2026-02] — Sesja 5+6: Mobile UX, Moduł 2
+
+### Dodano
+- **Moduł 2: Kalkulator Wolności Finansowej** (`pages/kalkulator-wolnosci.html`, `js/calculators/wolnosc.js`)
+  - Obliczenie celu FIRE (wydatki roczne / stopa wypłat)
+  - Ile lat do wolności przy obecnych oszczędnościach
+  - Ile miesięcznie odkładać żeby osiągnąć cel w N latach
+  - Symulacja fazy wypłat — jak długo kapitał wytrzyma
+  - Progress bar — postęp do celu FIRE
+  - Wykres akumulacji kapitału vs linia celu
+  - Wykres fazy emerytalnej (wypłaty z kapitału)
+  - Obsługa IKE/IKZE (brak podatku Belki)
+  - Reguła 4% domyślna, konfigurowalna stopa wypłat
+  - Słowniczek pojęć: FIRE, reguła 4%, procent składany
+
+- **Mobile UX — tooltips jako modal bottom sheet**
+  - Na mobile: kliknięcie kafelka → okienko od dołu ekranu
+  - Animacja slideUp, przyciemnione tło, przycisk "Rozumiem"
+  - Desktop bez zmian (hover na ikonie ⓘ)
+
+- **Czyszczenie pól przy focus**
+  - Domyślna wartość znika gdy użytkownik klika pole
+  - Wraca automatycznie jeśli pole zostaje puste
+
+- **Przycisk dark mode widoczny na mobile**
+  - Wcześniej cały header__nav był ukryty na mobile
+  - Teraz chowane są tylko linki, przycisk pozostaje
+
+### Naprawiono
+- `variables.css` — przywrócono utracony blok `:root` z tokenami
+- `form-input-wrapper` — przeprojektowany na flexbox
+  (suffix `zł`/`%` nie rozszerza kontenera)
+- Inputy: `type="text" inputmode="decimal"` + `maxlength`
+  (zapobiega rozszerzaniu layoutu przez przeglądarkę mobilną)
+- Dark mode — ujednolicony system na `html.dark-mode` / `html.light-mode`
+  (wcześniej `body.dark-mode` nie nadpisywało systemowego `prefers-color-scheme`)
+- Disclaimer — wyraźniejszy (tło, obramowanie, czytelniejszy font)
+
+### Znane bugi (pending)
+- [ ] Dark mode na Safari iOS — przycisk nie działa
+- [ ] Overflow layoutu przy wpisywaniu długich liczb na niektórych urządzeniach
 
 ---
 
