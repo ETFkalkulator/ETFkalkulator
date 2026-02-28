@@ -14,11 +14,6 @@ var TYPY_OBLIGACJI = {
   COI: { nazwa: 'COI — 4-letnie',   lata: 4,  marza: 0.0150 },
 };
 
-function zaokraglij(liczba, miejsca) {
-  miejsca = miejsca || 2;
-  return Math.round(liczba * Math.pow(10, miejsca)) / Math.pow(10, miejsca);
-}
-
 /* ----------------------------------------------------------
    GŁÓWNA FUNKCJA OBLICZENIOWA — pętla MIESIĘCZNA
    ---------------------------------------------------------- */
