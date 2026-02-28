@@ -557,3 +557,56 @@ body {
   .heading-1 { font-size: var(--text-2xl); }
   .card { padding: var(--space-5); }
 }
+
+/* ==========================================================
+   MOBILE OVERFLOW FIX — globalny dla wszystkich stron
+   Żaden element nie może rozszerzać strony w poziomie
+   ========================================================== */
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.container {
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Każdy grid/flex kontener nie może puchnąć */
+.kalkulator-uklad,
+.por-uklad,
+.formularz-karta,
+.formularz-pola,
+.form-group,
+.wyniki-kolumna,
+.por-wyniki {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Wrapper inputa — flexbox nie pozwala dzieciom puchnąć */
+.form-input-wrapper {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Input nigdy nie rozszerza rodzica */
+.form-input {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: 16px !important; /* zapobiega auto-zoom na iOS */
+  -webkit-appearance: none;
+}
+
+/* Hint pod inputem — zawija tekst */
+.form-hint {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  min-width: 0;
+}
