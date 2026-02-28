@@ -341,23 +341,30 @@
           <a href="kalkulator-obligacji.html">Obligacje</a>
           <a href="kalkulator-wolnosci.html">Wolność finansowa</a>
           <a href="porownywarka.html" style="color: var(--color-green-500)">Porównywarka</a>
-          <a href="../index.html#newsletter" class="btn btn--outline btn--sm">Newsletter</a>
+          <a href="../index.html#newsletter" class="btn btn--sm" style="border: 1.5px solid var(--color-green-300); color: var(--color-green-700); background: white; border-radius: var(--radius-full);">Newsletter</a>
           <button id="btn-darkmode" onclick="przelaczTryb()" aria-label="Przełącz tryb" style="background:none;border:1.5px solid var(--color-border);border-radius:var(--radius-full);width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-secondary);flex-shrink:0;">
             <svg id="ikona-slonce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
             <svg id="ikona-ksiezyc" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
         </nav>
-          <button class="hamburger" id="hamburger" onclick="przelaczMenu()" aria-label="Menu"><span class="hamburger__linia"></span><span class="hamburger__linia"></span><span class="hamburger__linia"></span></button>
       </div>
     </div>
   </header>
 
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobilne">
-    <a href="../pages/kalkulator-obligacji.html">Obligacje skarbowe</a>
-    <a href="../pages/kalkulator-wolnosci.html">Wolnosc finansowa</a>
-    <a href="../pages/porownywarka.html" class="aktywna">Porownywarka ETF</a>
-    <div class="mobile-menu__akcje"><a href="../index.html#newsletter" class="btn btn--primary btn--sm" style="display:inline-flex">Newsletter</a></div>
-  </nav>
+  <div class="mobile-nav-bar" id="mobile-nav-bar">
+    <div class="mobile-nav-bar__inner">
+    <a href="../pages/kalkulator-obligacji.html" class="mobile-nav-bar__link">Obligacje</a>
+    <span class="mobile-nav-bar__separator"></span>
+    <a href="../pages/kalkulator-wolnosci.html" class="mobile-nav-bar__link">Wolność finansowa</a>
+    <span class="mobile-nav-bar__separator"></span>
+    <a href="../pages/porownywarka.html" class="mobile-nav-bar__link aktywna">Porównywarka ETF</a>
+      <span class="mobile-nav-bar__separator"></span>
+      <div class="mobile-nav-bar__newsletter">
+        <a href="../index.html#newsletter" class="btn btn--sm" style="font-size:12px;padding:4px 12px;border:1.5px solid var(--color-green-300);color:var(--color-green-700);background:white;border-radius:var(--radius-full);white-space:nowrap">Newsletter</a>
+      </div>
+    </div>
+  </div>
+
 
   <main>
     <div class="container">
@@ -752,26 +759,6 @@
       if (el.value === '') { el.value = def; obliczPorownanie && obliczPorownanie(); }
     }
     function zaokraglij(v, dec) { return Math.round(v * Math.pow(10,dec)) / Math.pow(10,dec); }
-
-
-    function przelaczMenu() {
-      var menu = document.getElementById("mobile-menu");
-      var btn  = document.getElementById("hamburger");
-      var otwarty = menu.classList.toggle("mobile-menu--widoczne");
-      btn.classList.toggle("hamburger--otwarty", otwarty);
-      document.body.style.overflow = otwarty ? "hidden" : "";
-    }
-    document.addEventListener("DOMContentLoaded", function() {
-      var menu = document.getElementById("mobile-menu");
-      if (!menu) return;
-      menu.querySelectorAll("a").forEach(function(a) {
-        a.addEventListener("click", function() {
-          menu.classList.remove("mobile-menu--widoczne");
-          var btn = document.getElementById("hamburger");
-          if (btn) btn.classList.remove("hamburger--otwarty");
-          document.body.style.overflow = "";
-        });
-      });
     });
     function przelaczTryb() {
       var html    = document.documentElement;

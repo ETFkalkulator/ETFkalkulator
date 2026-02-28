@@ -94,6 +94,89 @@ var TOOLTIPS = {
     tytul: 'Dlaczego inflacja jest ważna?',
     tekst: 'Inflacja to wzrost cen. Musisz zarabiać więcej niż wynosi inflacja — inaczej realnie tracisz.',
     przyklad: 'Lokata 3%, inflacja 5% = tracisz 2% rocznie mimo że nominalnie zarabiasz. Obligacje EDO z marżą 2% = zawsze na plusie realnie.'
+  },
+
+  /* --------------------------------------------------------
+     MODUŁ 2 — Kalkulator Wolności Finansowej
+     -------------------------------------------------------- */
+  'wf-wynik-cel': {
+    tytul: 'Cel FIRE — ile potrzebujesz',
+    tekst: 'Kwota kapitału przy której Twoje inwestycje generują wystarczający dochód pasywny żeby pokryć wszystkie wydatki. Obliczana jako: wydatki roczne ÷ stopa wypłat.',
+    przyklad: 'Wydajesz 3 000 zł/mies. = 36 000 zł/rok. Stopa 4%: potrzebujesz 36 000 ÷ 0,04 = 900 000 zł kapitału.'
+  },
+  'wf-wynik-lata': {
+    tytul: 'Ile lat do wolności finansowej',
+    tekst: 'Szacowany czas do osiągnięcia celu FIRE przy obecnym tempie oszczędzania, kapitale startowym i zakładanej stopie zwrotu portfela.',
+    przyklad: 'Cel 900 000 zł, oszczędzasz 1 500 zł/mies., stopa 7%, start 0 zł → osiągniesz cel za ok. 22 lata.'
+  },
+  'wf-wynik-wydatki-rok': {
+    tytul: 'Roczne wydatki',
+    tekst: 'Twoje miesięczne wydatki przemnożone przez 12. To podstawa do obliczenia celu FIRE — portfel musi generować tę kwotę co roku.',
+    przyklad: '3 000 zł/mies. × 12 = 36 000 zł/rok. Tyle musi zarabiać Twój portfel żebyś nie musiał pracować.'
+  },
+  'wf-wynik-wymagane': {
+    tytul: 'Ile miesięcznie odkładać',
+    tekst: 'Odwrotna kalkulacja: przy zadanym czasie i stopie zwrotu, tyle musisz odkładać co miesiąc żeby osiągnąć cel FIRE dokładnie na czas.',
+    przyklad: 'Cel 900 000 zł za 20 lat, stopa 7%, start 0 zł → musisz odkładać ok. 2 050 zł/mies.'
+  },
+  'wf-wynik-wklad': {
+    tytul: 'Łączny wkład własny',
+    tekst: 'Suma wszystkich Twoich wpłat — kapitał startowy plus każda miesięczna oszczędność przez cały okres. To ile "swoich" pieniędzy włożyłeś.',
+    przyklad: 'Start 10 000 zł + 1 500 zł/mies. przez 22 lata = 406 000 zł wkładu własnego. Reszta to zysk z inwestycji.'
+  },
+  'wf-wynik-fire-trwa': {
+    tytul: 'Trwałość kapitału na emeryturze',
+    tekst: 'Jak długo Twój kapitał FIRE wytrzyma regularne wypłaty uwzględniające inflację. Przy regule 4% i dobrej stopie zwrotu kapitał powinien trwać wiecznie.',
+    przyklad: 'Kapitał 900 000 zł, wypłaty 3 000 zł/mies. (rosnące z inflacją), stopa 7% → portfel rośnie szybciej niż wypłacasz — nigdy się nie wyczerpie.'
+  },
+  'wf-wynik-stopa': {
+    tytul: 'Stopa zwrotu po podatku',
+    tekst: 'Oczekiwana roczna stopa zwrotu Twojego portfela po odjęciu podatku Belki (19%). Jeśli inwestujesz przez IKE/IKZE — podatku nie ma.',
+    przyklad: 'Stopa brutto 7%, podatek 19% od zysku → efektywna stopa netto ≈ 5,67%/rok.'
+  },
+  'wf-wynik-stopa-realna': {
+    tytul: 'Realna stopa zwrotu',
+    tekst: 'Stopa zwrotu po odjęciu zarówno podatku jak i inflacji. Mierzy rzeczywisty przyrost siły nabywczej — ile naprawdę zyskujesz.',
+    przyklad: 'Stopa po podatku 5,67%, inflacja 3,5% → realna stopa ≈ 2,1%/rok. To Twój prawdziwy zysk.'
+  },
+
+  /* --------------------------------------------------------
+     MODUŁ 3 — Porównywarka ETF vs Obligacje vs Lokata
+     -------------------------------------------------------- */
+  'por-etf-kapital': {
+    tytul: 'Kapitał końcowy ETF',
+    tekst: 'Całkowita wartość portfela ETF po zadanym czasie — wkład własny plus zyski z procentu składanego, po odliczeniu podatku Belki (chyba że IKE).',
+    przyklad: '10 000 zł start + 500 zł/mies. przez 10 lat, stopa 7%, podatek 19% → ok. 100 000 zł kapitału końcowego.'
+  },
+  'por-etf-zysk': {
+    tytul: 'Zysk ETF po podatku',
+    tekst: 'Różnica między kapitałem końcowym a sumą wszystkich wpłat — czyli ile faktycznie zarobiłeś na ETF po zapłaceniu podatku Belki.',
+    przyklad: 'Wpłaciłeś łącznie 70 000 zł, masz 100 000 zł → zysk po podatku = 30 000 zł.'
+  },
+  'por-etf-zysk-r': {
+    tytul: 'Zysk ETF realny (po inflacji)',
+    tekst: 'Zysk po podatku dodatkowo skorygowany o inflację. Pokazuje prawdziwy przyrost siły nabywczej — ile więcej możesz kupić za zarobione pieniądze.',
+    przyklad: 'Zysk po podatku 30 000 zł, inflacja 3,5% przez 10 lat (wzrost cen o 41%) → realny zysk ok. 953 zł.'
+  },
+  'por-etf-podatek': {
+    tytul: 'Podatek Belki — ETF',
+    tekst: 'Kwota podatku od zysku kapitałowego (19%) odprowadzona przy sprzedaży ETF. Przy inwestowaniu przez IKE/IKZE = 0 zł.',
+    przyklad: 'Zysk brutto 37 000 zł × 19% = 7 000 zł podatku. Z IKE zaoszczędziłbyś te 7 000 zł.'
+  },
+  'por-etf-cagr': {
+    tytul: 'CAGR ETF — roczna stopa zwrotu',
+    tekst: 'Compound Annual Growth Rate — średnioroczna stopa zwrotu z uwzględnieniem procentu składanego. Pozwala porównywać inwestycje o różnych horyzontach.',
+    przyklad: 'Wpłaciłeś 70 000 zł, masz 100 000 zł po 10 latach → CAGR ≈ 3,6%/rok po podatku.'
+  },
+  'por-obligacje-kapital': {
+    tytul: 'Kapitał końcowy Obligacje EDO',
+    tekst: 'Wartość obligacji EDO po wykupie. Rok 1: stała stopa. Od roku 2: inflacja + marża. Odsetki narastają rocznie (procent składany), podatek Belki na końcu.',
+    przyklad: '10 000 zł, inflacja 3,5% + marża 2%, przez 10 lat → ok. 93 000 zł po podatku Belki.'
+  },
+  'por-lokata-kapital': {
+    tytul: 'Kapitał końcowy Lokata',
+    tekst: 'Wartość lokaty bankowej przy założeniu stałej stopy przez cały okres i reinwestowaniu odsetek (procent składany). Podatek Belki pobierany co rok.',
+    przyklad: '10 000 zł + 500 zł/mies., stopa 4,5% przez 10 lat → ok. 84 000 zł po podatku.'
   }
 };
 
@@ -298,34 +381,34 @@ function stworzIkoneInfo(tooltipId) {
     'display: inline-flex',
     'align-items: center',
     'justify-content: center',
-    'width: 16px',
-    'height: 16px',
+    'width: 15px',
+    'height: 15px',
     'border-radius: 50%',
-    'border: 1.5px solid var(--color-text-muted, #AEAEB2)',
+    'border: none',
     'background: transparent',
     'color: var(--color-text-muted, #AEAEB2)',
-    'font-size: 10px',
-    'font-weight: 700',
-    'font-family: Georgia, serif',
     'cursor: pointer',
-    'margin-left: 5px',
+    'margin-left: 4px',
     'flex-shrink: 0',
-    'transition: all 0.15s ease',
+    'transition: color 0.15s ease',
+    'padding: 0',
     'line-height: 1',
+    'opacity: 0.6',
   ].join(';');
-  ikona.textContent = 'i';
+  /* Nowoczesna ikona — wypełnione kółko z "i", Phosphor/SF Symbols style */
+  ikona.innerHTML = '<svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1-2a1 1 0 100 2 1 1 0 000-2z"/></svg>';
 
   // Desktop — hover
   ikona.addEventListener('mouseenter', function() {
     if (!czyMobile()) {
-      ikona.style.borderColor = 'var(--color-green-500, #40916C)';
-      ikona.style.color       = 'var(--color-green-500, #40916C)';
+      ikona.style.color   = 'var(--color-text-primary, #1C1C1E)';
+      ikona.style.opacity = '1';
       pokazDymek(tooltipId, ikona);
     }
   });
   ikona.addEventListener('mouseleave', function() {
-    ikona.style.borderColor = 'var(--color-text-muted, #AEAEB2)';
-    ikona.style.color       = 'var(--color-text-muted, #AEAEB2)';
+    ikona.style.color   = 'var(--color-text-muted, #AEAEB2)';
+    ikona.style.opacity = '0.6';
     ukryjDymek();
   });
 
@@ -362,25 +445,17 @@ function podepnijTooltips() {
 
   var kafelkiIds = [
     /* Moduł 1 — Obligacje */
-    'wynik-kapital-koncowy',
-    'wynik-wklad-wlasny',
-    'wynik-doplata-laczna',
-    'wynik-zysk-nominalny',
-    'wynik-podatek-belki',
-    'wynik-zysk-po-podatku',
-    'wynik-zysk-realny',
-    'wynik-cagr',
-    'wynik-cagr-realny',
-    'wynik-obligacje-porownanie',
-    'wynik-lokata-porownanie',
+    'wynik-kapital-koncowy', 'wynik-wklad-wlasny', 'wynik-doplata-laczna',
+    'wynik-zysk-nominalny', 'wynik-podatek-belki', 'wynik-zysk-po-podatku',
+    'wynik-zysk-realny', 'wynik-cagr', 'wynik-cagr-realny',
+    'wynik-obligacje-porownanie', 'wynik-lokata-porownanie',
     /* Moduł 2 — Wolność Finansowa */
-    'wf-wynik-cel',
-    'wf-wynik-lata',
-    'wf-wynik-wymagane',
-    'wf-wynik-fire-trwa',
-    'wf-wynik-stopa-realna',
+    'wf-wynik-cel', 'wf-wynik-lata', 'wf-wynik-wydatki-rok',
+    'wf-wynik-wymagane', 'wf-wynik-wklad', 'wf-wynik-fire-trwa',
+    'wf-wynik-stopa', 'wf-wynik-stopa-realna',
     /* Moduł 3 — Porównywarka */
-    'por-etf-kapital',
+    'por-etf-kapital', 'por-etf-zysk', 'por-etf-zysk-r',
+    'por-etf-podatek', 'por-etf-cagr',
     'por-obligacje-kapital',
     'por-lokata-kapital',
   ];
